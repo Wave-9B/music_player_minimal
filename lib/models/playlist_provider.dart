@@ -10,21 +10,21 @@ class PlaylistProvider extends ChangeNotifier {
       songName: "Nujilla",
       artistName: "Wave-9B",
       albumArtImagePath: "assets/images/nujabes_dilla.png",
-      audioPath: "assets/audio/nuj_ill_wave9b.mp3",
+      audioPath: "audio/nuj_ill_wave9b.mp3",
     ),
     // song 2
     Song(
       songName: "Paradise",
       artistName: "Wave-9B",
       albumArtImagePath: "assets/images/paradise_cover.png",
-      audioPath: "assets/audio/paradise.mp3",
+      audioPath: "audio/paradise.mp3",
     ),
     // song 3
     Song(
       songName: "Shoes n Cars",
       artistName: "Wave-9B",
       albumArtImagePath: "assets/images/shoes_n_cars_cover.png",
-      audioPath: "assets/audio/shoes_n_cars.mp3",
+      audioPath: "audio/shoes_n_cars.mp3",
     ),
   ];
 
@@ -35,8 +35,12 @@ class PlaylistProvider extends ChangeNotifier {
   Duration _currentDuration = Duration.zero;
   Duration _totalDuration = Duration.zero;
 
+  // current song index
+  int? _currentSongIndex;
+
   // audio constructor
   PlaylistProvider() {
+    _currentSongIndex = 0;
     listenToDuration();
   }
 
@@ -68,13 +72,12 @@ class PlaylistProvider extends ChangeNotifier {
   }
 
   //pause or resume
-   void pauseOrResume() async {
+  void pauseOrResume() async {
     if (_isPlaying) {
       pause();
     } else {
       resume();
     }
-
   }
 
   // seek to a specific position int he current song
@@ -133,9 +136,6 @@ class PlaylistProvider extends ChangeNotifier {
   }
 
   // dispose audio player
-
-  // current playing song index
-  int? _currentSongIndex;
 
   // GETTERS
   List<Song> get playlist => _playlist;
